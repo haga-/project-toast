@@ -23,6 +23,7 @@
   padding: 16px;
   padding-right: 0px;
 }
+
 .iconContainer svg {
   display: block;
 }
@@ -38,24 +39,31 @@
 .notice {
   background: var(--color-notice-bg);
 }
+
 .notice .iconContainer {
   color: var(--color-notice);
 }
+
 .warning {
   background: var(--color-warning-bg);
 }
+
 .warning .iconContainer {
   color: var(--color-warning);
 }
+
 .success {
   background: var(--color-success-bg);
 }
+
 .success .iconContainer {
   color: var(--color-success);
 }
+
 .error {
   background: var(--color-error-bg);
 }
+
 .error .iconContainer {
   color: var(--color-error);
 }
