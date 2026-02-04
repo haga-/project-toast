@@ -4,6 +4,7 @@ import Button from "../Button";
 import ToastShelf from "../ToastShelf";
 
 import styles from "./ToastPlayground.module.css";
+import { ToastContext } from "../ToastProvider/ToastProvider";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
@@ -12,22 +13,11 @@ function ToastPlayground() {
     VARIANT_OPTIONS[0]
   );
   const [message, setMessage] = React.useState("");
-  const [toasts, setToasts] = React.useState([]);
-
-  const onClose = (idToRemove) => {
-    setToasts(prevToasts => prevToasts.filter(({ id }) => id !== idToRemove))
-  }
-
-  const addToast = () => {
-    const id = crypto.randomUUID();
-    const newToast = { id, message, variant: currentVariant, onClose };
-    const newToasts = [...toasts, newToast];
-    setToasts(newToasts);
-  }
+  const { toasts, addToast } = React.useContext(ToastContext)
 
   const onSubmit = (event) => {
     event.preventDefault();
-    addToast();
+    addToast({ message, currentVariant });
 
     setMessage('');
     setCurrentVariant('notice');
