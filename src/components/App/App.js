@@ -7,12 +7,10 @@ import ToastProvider from '../ToastProvider/ToastProvider';
 
 function App() {
   return (
-    <>
-      <ToastProvider>
-        <ToastPlayground />
-        <Footer />
-      </ToastProvider>
-    </>
+    <ToastProvider>
+      <ToastPlayground />
+      <Footer />
+    </ToastProvider>
   );
 }
 

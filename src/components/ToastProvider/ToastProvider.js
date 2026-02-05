@@ -1,31 +1,31 @@
 import React from 'react';
 
-import useEscapeKey from '../../hooks/use-escape-key';
+import useKeydown from '../../hooks/use-keydown';
 
 export const ToastContext = React.createContext();
 
 function ToastProvider({ children }) {
   const [toasts, setToasts] = React.useState([]);
 
-  const onClose = (idToRemove) => {
-    setToasts(prevToasts => prevToasts.filter(({ id }) => id !== idToRemove))
-  }
-
-  const addToast = ({ message, currentVariant }) => {
-    const id = crypto.randomUUID();
-    const newToast = { id, message, variant: currentVariant, onClose };
+  const addToast = ({ message, variant }) => {
+    const newToast = { id: crypto.randomUUID(), message, variant };
     const newToasts = [...toasts, newToast];
     setToasts(newToasts);
+  }
+
+  const dismissToast = (idToDismiss) => {
+    const nextToasts = toasts.filter(({ id }) => id !== idToDismiss);
+    setToasts(nextToasts)
   }
 
   const handleEscape = React.useCallback(() => {
     setToasts([])
   }, [])
 
-  useEscapeKey(handleEscape);
+  useKeydown('Escape', handleEscape);
 
   return (
-    <ToastContext.Provider value={{ toasts, addToast }}>
+    <ToastContext.Provider value={{ toasts, addToast, dismissToast }}>
       {children}
     </ToastContext.Provider>
   )
